@@ -81,6 +81,8 @@ function App(): React.JSX.Element {
 
   const handleLogin = async () => {
     try {
+      // This line had to be added. Otherwise, the login will only works once. New external id will not be accepted.
+      // https://github.com/OneSignal/react-native-onesignal/issues/1565#issuecomment-1746662665
       await OneSignal.User.addAlias("external_id", externalId);
       await OneSignal.login(externalId);
       setLoginStatus('Successfully logged in with external ID: ' + externalId);
